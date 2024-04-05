@@ -1,28 +1,22 @@
 package com.ubs.exercise.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.ubs.exercise.converter.json.JsonConverter;
-import com.ubs.exercise.model.user.User;
+import com.ubs.exercise.converter.xml.XMLConverter;
 import com.ubs.exercise.persister.Persister;
-import org.apache.commons.beanutils.expression.Resolver;
-import org.apache.commons.lang3.reflect.TypeLiteral;
-import org.aspectj.weaver.ResolvedType;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-
 @Service
-public class JsonToCacheService<T , R extends CrudRepository> implements IDataToCacheService{
+public class XmlToCacheService <T , R extends CrudRepository> implements IDataToCacheService{
     @Autowired
-    private JsonConverter jsonConverter;
+    private XMLConverter jsonConverter;
 
     @Autowired
     private R repository;
 
     private Class clazz;
-    public JsonToCacheService(Class clazz){
+    public XmlToCacheService(Class clazz){
         this.clazz = clazz;
 
     }

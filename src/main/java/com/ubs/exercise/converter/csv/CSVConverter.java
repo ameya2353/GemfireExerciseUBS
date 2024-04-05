@@ -23,10 +23,6 @@ import java.util.List;
 public class CSVConverter<T> implements IConverter {
     private ColumnPositionMappingStrategy converterStrategy;
 
-    @Override
-    public <T> List<T> convert(String path, Class<T> type) throws Exception {
-        throw new IllegalAccessException("Please do not use this constructor for CSV");
-    }
 
     @Override
     public <T> List<T> convert(String path) throws IOException {
@@ -59,5 +55,10 @@ public class CSVConverter<T> implements IConverter {
             return true;
         }
         throw new InvalidCsvFileException("Provided file is not a csv file");
+    }
+
+    @Override
+    public void supports(Class clazz) throws IllegalAccessException {
+        throw new IllegalAccessException("Supports not required");
     }
 }

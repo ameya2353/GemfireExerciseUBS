@@ -25,15 +25,21 @@ public class CSVConverterTest {
 
     @Test()
     public void returnsEmptyListIfPathIsNull() throws Exception {
-        List<User> users = userCSVConverter.convert(null, User.class);
+        List<User> users = userCSVConverter.convert(null);
         Assert.assertEquals(users.size(),0);
     }
 
     @Test()
+    public void supportsFunctionDisabled() throws Exception {
+        exception.expect(IllegalAccessException.class);
+        exception.expectMessage(TestConstants.SUPPORT_NOT_REQUIRED);
+        userCSVConverter.supports(User.class);
+    }
+    @Test()
     public void ifConverterMappingIsNotDefined() throws Exception{
         exception.expect(CsvConverterException.class);
         exception.expectMessage(TestConstants.CSV_CONVERTER_MAPPING_EXCEPTION_MESSEGE);
-        userCSVConverter.convert(TestConstants.CSV_VALID_FILE_PATH, User.class);
+        userCSVConverter.convert(TestConstants.CSV_VALID_FILE_PATH);
     }
 
     @Test()
@@ -41,20 +47,20 @@ public class CSVConverterTest {
         exception.expect(InvalidCsvFileException.class);
         exception.expectMessage(TestConstants.NOT_A_CSV_EXCEPTION_MESSEGE);
         userCSVConverter.setConverterStrategy(new UserCsvMapper());
-        userCSVConverter.convert(TestConstants.INVALID_FILE_PATH, User.class);
+        userCSVConverter.convert(TestConstants.INVALID_FILE_PATH);
     }
 
     @Test()
     public void ifEverythingIsFineConvertsTheDataFromCSVToPOJO() throws Exception {
         userCSVConverter.setConverterStrategy(new UserCsvMapper());
-       List<User> users =  userCSVConverter.convert(TestConstants.CSV_VALID_FILE_PATH, User.class);
+       List<User> users =  userCSVConverter.convert(TestConstants.CSV_VALID_FILE_PATH);
        Assert.assertEquals(1,users.size());
     }
 
     @Test()
     public void checkDataIsBeenConvertedCorrectly() throws Exception {
         userCSVConverter.setConverterStrategy(new UserCsvMapper());
-        List<User> users =  userCSVConverter.convert(TestConstants.CSV_VALID_FILE_PATH, User.class);
+        List<User> users =  userCSVConverter.convert(TestConstants.CSV_VALID_FILE_PATH);
         Assert.assertEquals(TestConstants.TEST_DATA , users.get(0).toString());
     }
 

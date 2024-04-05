@@ -3,6 +3,8 @@ package com.ubs.exercise.model.user;
 
 import com.opencsv.bean.CsvBindByPosition;
 import com.ubs.exercise.model.user.address.Address;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -12,8 +14,8 @@ import java.io.Serializable;
 
 @Data
 @Region("user")
+@XmlRootElement(name = "user")
 public class User implements Serializable {
-
 
     @Id
     private String username;

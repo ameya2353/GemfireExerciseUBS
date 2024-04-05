@@ -84,16 +84,6 @@ public class PersisterTest {
     @EnableGemfireRepositories(basePackageClasses = UserRepo.class)
     static class TestConfiguration {
 
-        @Bean
-        public UserService userCsvService(){
-            return new UserService();
-        }
-
-        @Bean
-        public CSVConverter csvConverter(){
-            return new CSVConverter();
-        }
-
     }
 
 

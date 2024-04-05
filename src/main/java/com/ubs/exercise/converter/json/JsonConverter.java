@@ -16,20 +16,17 @@ import java.util.List;
 @Component("jsonConverter")
 public class JsonConverter implements IConverter {
 
+    Class clazz =null;
+
     @Override
-    public <T>List<T> convert(String path, Class<T> type) throws Exception {
+    public <T> List<T> convert(String path) throws IOException {
         if(path==null){
             log.info("No path specified.");
             return Collections.EMPTY_LIST;
         }
         isFileValid(path);
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(new File(path),mapper.getTypeFactory().constructCollectionType(List.class, type));
-    }
-
-    @Override
-    public <T> List<T> convert(String path) throws IOException {
-        return null;
+        return mapper.readValue(new File(path),mapper.getTypeFactory().constructCollectionType(List.class, clazz));
     }
 
     @Override
@@ -43,5 +40,10 @@ public class JsonConverter implements IConverter {
             return true;
         }
         throw new InvalidJsonFileException("Provided file is not a json file");
+    }
+
+    @Override
+    public void supports(Class clazz) throws IllegalAccessException {
+        this.clazz = clazz;
     }
 }
