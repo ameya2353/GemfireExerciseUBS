@@ -1,4 +1,4 @@
-package com.ubs.exercise.converter.exception;
+package com.ubs.exercise.converter.csv.exception;
 
 public class CsvConverterException extends RuntimeException {
 

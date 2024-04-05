@@ -1,41 +1,33 @@
 package com.ubs.exercise.persister;
 
 import com.ubs.exercise.converter.IConverter;
+import lombok.NonNull;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
-public abstract class Persister<T> {
+public class Persister<T> {
     private CrudRepository repository;
     private List<T> convertedData;
-    private IConverter converter;
 
-    public Persister(CrudRepository repository ,  IConverter converter) {
+    public Persister(@NonNull CrudRepository repository ,@NonNull List<T> convertedData) {
+        if(repository == null){
+            throw new NullPointerException("Repository cannot be null");
+        }
         this.repository = repository;
-        this.converter = converter;
-    }
-
-    /*
-    * convert data from giving file path to list of object
-    * store it in the convertedData
-    *
-    * */
-    public abstract void convert(String filePath);
-
-    /*
-     * set converted data list
-     * @param convertedData list of converted elements
-     *
-     * */
-    protected void setConverterData(List<T> convertedData){
         this.convertedData = convertedData;
     }
 
-    /*
-     * persist data to the database
-     *
-     * */
-    public void savedata() {
-        this.repository.saveAll(this.convertedData);
+    public boolean savedata() {
+        if(!(this.convertedData.isEmpty() || this.convertedData == null)){
+            return StreamSupport.stream(this.repository.saveAll(this.convertedData).spliterator(),false).count()>0L;
+        }
+       return false;
+    }
+
+    public void destroy(){
+        this.convertedData = null;
     }
 }

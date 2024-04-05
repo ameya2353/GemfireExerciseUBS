@@ -4,11 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.ubs.exercise.converter.BaseMapper;
 import com.ubs.exercise.converter.IConverter;
-import com.ubs.exercise.converter.exception.CsvConverterException;
-import com.ubs.exercise.converter.exception.InvalidCsvFileException;
-import lombok.Setter;
+import com.ubs.exercise.converter.csv.exception.CsvConverterException;
+import com.ubs.exercise.converter.csv.exception.InvalidCsvFileException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -18,20 +19,23 @@ import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-public class CSVConverter implements IConverter {
-    private @Setter ColumnPositionMappingStrategy converter;
+@Component("csvConverter")
+public class CSVConverter<T> implements IConverter {
+    private ColumnPositionMappingStrategy converterStrategy;
 
     @Override
-    public <T> List<T> convert(String path , Class<T> type) throws IOException {
+    public <T> List<T> convert(String path, Class<T> type) throws Exception {
+        throw new IllegalAccessException("Please do not use this constructor for CSV");
+    }
+
+    @Override
+    public <T> List<T> convert(String path) throws IOException {
         if(path==null){
-            log.info("No path specified.");
+            log.info("No path specified, returning empty list");
             return Collections.EMPTY_LIST;
         }
-
-        if(!path.endsWith(".csv")){
-            throw new InvalidCsvFileException("Provided file is not a csv file");
-        }
-        if(converter==null){
+        isFileValid(path);
+        if(converterStrategy==null){
             throw new CsvConverterException("Converter Mapping not provided , set the converter mapping");
         }
         Reader reader = Files.newBufferedReader(Paths.get(path));
@@ -39,8 +43,21 @@ public class CSVConverter implements IConverter {
                     .withType(new TypeReference<T>(){}.getClass())
                     .withIgnoreLeadingWhiteSpace(true)
                     .withVerifyReader(true)
-                    .withMappingStrategy(converter)
+                    .withMappingStrategy(converterStrategy)
                     .build();
         return csvToBean.parse();
+    }
+
+    @Override
+    public void setConverterStrategy(BaseMapper strategy) {
+        converterStrategy = (ColumnPositionMappingStrategy) strategy;
+    }
+
+    @Override
+    public boolean isFileValid(String filePath) {
+        if(filePath.endsWith(".csv")){
+            return true;
+        }
+        throw new InvalidCsvFileException("Provided file is not a csv file");
     }
 }

@@ -1,0 +1,19 @@
+package com.ubs.exercise.test;
+
+public class TestConstants {
+    public static final String TEST_DATA = "UserName: andyng123 | Email: andy-zc.ng@ubs.com | Address: Street: 123 UBS Street | City: London | Country: UK";
+    public static final String CSV_CONVERTER_MAPPING_EXCEPTION_MESSEGE = "Converter Mapping not provided , set the converter mapping";
+    public static final String NOT_A_JSON_EXCEPTION_MESSEGE = "Provided file is not a json file";
+    public static final String CONVERTER_MAPPING_NOT_REQUIRED_EXCEPTION_MESSEGE = "Json Converter does not require Converter Strategy. Please remove the setConverterStrategy function call";
+    public static final String NOT_A_CSV_EXCEPTION_MESSEGE = "Provided file is not a csv file";
+    public static final String CSV_VALID_FILE_PATH = "test-space/csv/valid-csv-file/testfile.csv";
+    public static final String INVALID_FILE_PATH = "test-space/csv/invalid-file/testfile";
+
+    public static final String JSON_VALID_FILE_PATH = "test-space/json/valid-json-file/testfile.json";
+    public static final String NULL_REPO = "Repository cannot be null";
+
+
+
+
+
+}

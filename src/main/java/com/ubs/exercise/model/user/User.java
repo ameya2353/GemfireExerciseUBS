@@ -8,9 +8,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.gemfire.mapping.annotation.Region;
 
+import java.io.Serializable;
+
 @Data
 @Region("user")
-public class User {
+public class User implements Serializable {
 
 
     @Id
