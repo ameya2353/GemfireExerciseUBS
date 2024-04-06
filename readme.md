@@ -40,7 +40,7 @@
 
 > 3. Best Practices of SOLID principle and Testing pyramid should be followed.
 - The design in implementation of the code is done keeping SOLID principles in mind.
-- I have implemented Unit testing upon the converters and persister and the UserService and integration testing on the UserService with connection to a local caching server.
+- I have implemented Unit testing upon the converters , persister and the UserService . Integration testing on the UserService with connection to a local caching server.
 - In unit testing senario the cache that is being used is the client cache (ClientRegionShortcut.LOCAL)
 
 **The code base is integrated with Github workflow for CI/CD. The tests are automatically run after the push to master happens.**
