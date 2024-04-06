@@ -33,10 +33,9 @@ public class UserServiceTest {
 
     @Test
     public void test1_checkIfCSVDataPersists() throws Exception {
-        File f = new File("test");
-        System.out.println("file-path :"+f.getAbsolutePath());
-
-        Assert.assertEquals(true , service.persistCSVData(TestConstants.CSV_VALID_FILE_PATH));
+        File testFile = new File(TestConstants.CSV_VALID_FILE_PATH);
+        System.out.println("file-path : "+testFile.getAbsolutePath());
+        Assert.assertEquals(true , service.persistCSVData(testFile.getAbsolutePath()));
     }
     @Test
     public void test2_checkIfDataPresentInTheCache(){
@@ -87,7 +86,9 @@ public class UserServiceTest {
 
     @Test
     public void test10_checkIfXmlDataPersists() throws Exception {
-        Assert.assertEquals(true , service.persistXmlData(TestConstants.XML_VALID_FILE_PATH));
+        File testFile = new File(TestConstants.XML_VALID_FILE_PATH);
+        System.out.println("file-path : "+testFile.getAbsolutePath());
+        Assert.assertEquals(true , service.persistXmlData(testFile.getAbsolutePath()));
     }
     @Test
     public void test11_checkIfDataPresentInTheCache(){
