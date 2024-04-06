@@ -11,11 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show File Structure
-        run: ls -lrt
 
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Show File Structure
+        run: ls -lrt
 
       - name: Set Envionment Variable
         run: export JAVA_TOOL_OPTIONS='--add-exports=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED --add-opens=java.management/javax.management=ALL-UNNAMED  --add-exports=java.management/com.sun.jmx.remote.security=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED'
