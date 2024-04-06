@@ -7,10 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.gemfire.config.annotation.EnableManager;
 
-import java.util.Scanner;
-
 @SpringBootApplication
-@EnableManager(start = true)
 @ComponentScan(basePackages = "com.ubs.exercise.server.functions")
 @Import(GemfireExerciseServerConfig.class)
 public class GemfireExerciseServer {
