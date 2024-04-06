@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Set up latest Oracle JDK 22'
+      - name: 'Set up latest JDK N from jdk.java.net'
         uses: oracle-actions/setup-java@v1
         with:
-          website: oracle.com
+          website: jdk.java.net
           release: 19
 
       - name: Set JVM OPTIONS
