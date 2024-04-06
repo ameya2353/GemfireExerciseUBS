@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -32,6 +33,9 @@ public class UserServiceTest {
 
     @Test
     public void test1_checkIfCSVDataPersists() throws Exception {
+        File f = new File("test");
+        System.out.println("file-path :"+f.getAbsolutePath());
+
         Assert.assertEquals(true , service.persistCSVData(TestConstants.CSV_VALID_FILE_PATH));
     }
     @Test
