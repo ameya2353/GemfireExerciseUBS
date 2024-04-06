@@ -33,6 +33,8 @@ public class UserServiceTest {
 
     @Test
     public void test1_checkIfCSVDataPersists() throws Exception {
+        File f = new File("test");
+        System.out.println(f.getAbsolutePath());
         File testFile = new File(TestConstants.CSV_VALID_FILE_PATH);
         System.out.println("file-path : "+testFile.getAbsolutePath());
         Assert.assertEquals(true , service.persistCSVData(testFile.getAbsolutePath()));
