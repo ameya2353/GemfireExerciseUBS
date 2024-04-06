@@ -17,8 +17,9 @@ jobs:
       - name: 'Set up latest Oracle JDK 22'
         uses: oracle-actions/setup-java@v1
         with:
-            website: oracle.com
-            release: 22
+          website: oracle.com
+          release: 19
+          version: 19.0.1
 
       - name: Run Maven tests
         run: mvn test -Punit-tests
@@ -32,7 +33,9 @@ jobs:
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
-          release: 22
+          release: 19
+          version: 19.0.1
+
 
       - name: Run Maven tests
         run: mvn test -Pintegration-tests
