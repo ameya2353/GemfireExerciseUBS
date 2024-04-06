@@ -5,6 +5,7 @@ import com.ubs.exercise.client.function.executions.UserFunctionExecution;
 import com.ubs.exercise.client.model.user.User;
 import com.ubs.exercise.client.model.user.UserCsvMapper;
 import com.ubs.exercise.client.repository.UserRepo;
+import com.ubs.exercise.client.services.IDataToCacheService;
 import com.ubs.exercise.client.services.XmlToCacheService;
 import com.ubs.exercise.client.services.CSVToCacheService;
 import com.ubs.exercise.client.services.JsonToCacheService;
@@ -31,23 +32,28 @@ public class UserService{
     private UserFunctionExecution userFunctionExecution;
 
     public boolean persistCSVData(String path) throws Exception {
-        return csvService.persistData(path);
+        return persistData(path , csvService);
     }
 
     public boolean persistJsonData(String path) throws Exception {
-        return jsonService.persistData(path);
+        return persistData(path , jsonService);
     }
 
     public boolean persistXmlData(String path) throws Exception {
-        return xmlService.persistData(path);
+        return persistData(path , xmlService);
     }
 
     public String fetchUserDataJson(String id) throws Exception {
-        return userFunctionExecution.getUser(id);
+        return  userFunctionExecution.getUser(id);
     }
 
     public String fetchAllUserDataJson(List<String> ids) throws Exception {
         return userFunctionExecution.getAllUsers();
+    }
+
+
+    private boolean persistData(String path , IDataToCacheService iDataToCacheService) throws Exception {
+        return iDataToCacheService.persistData(path);
     }
 
 }

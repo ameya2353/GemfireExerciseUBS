@@ -4,10 +4,15 @@ import com.ubs.exercise.client.converter.BaseMapper;
 import com.ubs.exercise.client.converter.IConverter;
 import com.ubs.exercise.client.converter.xml.exception.InvalidXMLFileException;
 import com.ubs.exercise.client.model.XmlWrapper;
+import com.ubs.exercise.client.model.user.User;
+import com.ubs.exercise.client.model.user.address.Address;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -47,8 +52,8 @@ public class XMLConverter<T> implements IConverter {
 
     private <T> List<T> unmarshalXMLToList(String filePath, Class<T> type) throws JAXBException {
             File xmlFile = new File(filePath);
-            javax.xml.bind.JAXBContext jaxbContext = javax.xml.bind.JAXBContext.newInstance(type, XmlWrapper.class);
-            javax.xml.bind.Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            JAXBContext jaxbContext = JAXBContext.newInstance(type, XmlWrapper.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             XmlWrapper<T> wrapper = (XmlWrapper<T>) jaxbUnmarshaller.unmarshal(xmlFile);
             return wrapper.getItems();
     }

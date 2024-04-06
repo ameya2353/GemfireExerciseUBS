@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xmlWrapper>
-    <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="user">
+    <attributes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="user">
         <email>andy-zc.ng@ubs.com</email>
         <username>andyng123</username>
         <address>
+            <street>123 UBS Street</street>
             <city>London</city>
             <country>UK</country>
-            <street>123 UBS Street</street>
         </address>
-
-    </items>
+    </attributes>
 </xmlWrapper>

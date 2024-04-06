@@ -28,7 +28,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = GemfireClientConfiguration.class)
 public class UserServiceIntegrationTest extends ForkingClientServerIntegrationTestsSupport {
-    private static final String USER_NAME = "andyng123";
     @Resource(name = "user")
     private Region<Long, User> userRegion;
 
@@ -63,17 +62,17 @@ public class UserServiceIntegrationTest extends ForkingClientServerIntegrationTe
     }
       @Test
     public void test4_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = Optional.of(userRegion.get(USER_NAME));
+        Optional<User> user = Optional.of(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test5_checkDataIntegrityInTheCache(){
-        Optional<User> user = Optional.of(userRegion.get(USER_NAME));
+        Optional<User> user = Optional.of(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
         repo.deleteAll();
-        Optional<User> deletedUser =  Optional.ofNullable(userRegion.get(USER_NAME));
+        Optional<User> deletedUser =  Optional.ofNullable(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(true , deletedUser.isEmpty());
     }
 
@@ -84,17 +83,17 @@ public class UserServiceIntegrationTest extends ForkingClientServerIntegrationTe
 
     @Test
     public void test7_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = Optional.of(userRegion.get(USER_NAME));
+        Optional<User> user = Optional.of(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test9_checkDataIntegrityInTheCache(){
-        Optional<User> user = Optional.of(userRegion.get(USER_NAME));
+        Optional<User> user = Optional.of(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
         repo.deleteAll();
-        Optional<User> deletedUser =  Optional.ofNullable(userRegion.get(USER_NAME));
+        Optional<User> deletedUser =  Optional.ofNullable(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(true , deletedUser.isEmpty());
     }
 
@@ -107,17 +106,17 @@ public class UserServiceIntegrationTest extends ForkingClientServerIntegrationTe
 
     @Test
     public void test11_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = Optional.of(userRegion.get(USER_NAME));
+        Optional<User> user = Optional.of(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test13_checkDataIntegrityInTheCache(){
-        Optional<User> user = Optional.of(userRegion.get(USER_NAME));
+        Optional<User> user = Optional.of(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
         repo.deleteAll();
-        Optional<User> deletedUser =  Optional.ofNullable(userRegion.get(USER_NAME));
+        Optional<User> deletedUser =  Optional.ofNullable(userRegion.get(TestConstants.USER_NAME));
         Assert.assertEquals(true , deletedUser.isEmpty());
 
     }
@@ -125,7 +124,7 @@ public class UserServiceIntegrationTest extends ForkingClientServerIntegrationTe
     @Test
     public void test14_checkIfDataIsFetchedINJsonString() throws Exception {
         userService.persistXmlData(TestConstants.XML_VALID_FILE_PATH);
-        String jsonString = userService.fetchUserDataJson(USER_NAME);
+        String jsonString = userService.fetchUserDataJson(TestConstants.USER_NAME);
         Assert.assertEquals(TestConstants.JSON_TEST_DATA , jsonString);
     }
 }

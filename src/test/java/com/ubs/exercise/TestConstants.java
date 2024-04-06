@@ -24,6 +24,8 @@ public class TestConstants {
 
     public static final String MULTIPLE_JSON_TEST_DATA = "[{\"username\":\"andyng123\",\"email\":\"andy-zc.ng@ubs.com\",\"address\":{\"street\":\"123 UBS Street\",\"city\":\"London\",\"country\":\"UK\"}},{\"username\":\"andyng1234\",\"email\":\"andy-zc.ng@ubs.com\",\"address\":{\"street\":\"123 UBS Street\",\"city\":\"London\",\"country\":\"UK\"}}]";
 
+    public static final String USER_NAME = "andyng123";
+
 
 
 }

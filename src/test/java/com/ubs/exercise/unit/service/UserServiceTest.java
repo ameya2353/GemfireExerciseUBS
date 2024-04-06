@@ -23,7 +23,6 @@ import java.util.stream.StreamSupport;
 @Import(TestConfiguration.class)
 public class UserServiceTest {
 
-    private static final String USER_NAME = "andyng123";
 
     @Autowired
     private UserRepo userRepo;
@@ -42,17 +41,17 @@ public class UserServiceTest {
 
     @Test
     public void test3_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test4_checkDataIntegrityInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
         userRepo.deleteAll();
-        Optional<User> deletedUser = userRepo.findById(USER_NAME);
+        Optional<User> deletedUser = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , deletedUser.isEmpty());
     }
 
@@ -67,17 +66,17 @@ public class UserServiceTest {
 
     @Test
     public void test8_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test9_checkDataIntegrityInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
         userRepo.deleteAll();
-        Optional<User> deletedUser = userRepo.findById(USER_NAME);
+        Optional<User> deletedUser = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , deletedUser.isEmpty());
     }
 
@@ -93,26 +92,19 @@ public class UserServiceTest {
 
     @Test
     public void test12_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test13_checkDataIntegrityInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
         userRepo.deleteAll();
-        Optional<User> deletedUser = userRepo.findById(USER_NAME);
+        Optional<User> deletedUser = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , deletedUser.isEmpty());
 
-    }
-
-    @Test
-    public void test14_checkIfDataIsFetchedINJsonString() throws Exception {
-        service.persistXmlData(TestConstants.XML_VALID_FILE_PATH);
-        String jsonString = service.fetchUserDataJson(USER_NAME);
-        Assert.assertEquals(TestConstants.JSON_TEST_DATA , jsonString);
     }
 
 }

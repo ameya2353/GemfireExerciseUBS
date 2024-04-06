@@ -4,6 +4,7 @@ import com.ubs.exercise.client.converter.csv.CSVConverter;
 import com.ubs.exercise.client.converter.json.JsonConverter;
 import com.ubs.exercise.client.converter.xml.XMLConverter;
 import com.ubs.exercise.client.fetcher.JsonFetcher;
+import com.ubs.exercise.client.function.executions.UserFunctionExecution;
 import com.ubs.exercise.client.model.user.User;
 import com.ubs.exercise.client.model.user.UserCsvMapper;
 import com.ubs.exercise.client.repository.UserRepo;
@@ -13,11 +14,15 @@ import com.ubs.exercise.client.services.XmlToCacheService;
 import com.ubs.exercise.client.services.user.UserService;
 import org.apache.geode.cache.client.ClientRegionShortcut;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.gemfire.config.annotation.ClientCacheApplication;
 import org.springframework.data.gemfire.config.annotation.EnableEntityDefinedRegions;
+import org.springframework.data.gemfire.function.config.EnableGemfireFunctionExecutions;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 
 @ClientCacheApplication
+@ComponentScan(basePackages = {"com.ubs.exercise.client.function.executions"})
+@EnableGemfireFunctionExecutions(basePackages = {"com.ubs.exercise.client.function.executions"})
 @EnableEntityDefinedRegions(basePackageClasses = User.class, clientRegionShortcut = ClientRegionShortcut.LOCAL)
 @EnableGemfireRepositories(basePackageClasses = UserRepo.class)
 public class TestConfiguration {
@@ -69,5 +74,6 @@ public class TestConfiguration {
     public JsonFetcher<String, UserRepo> jsonFetcher() {
         return new JsonFetcher<String, UserRepo>();
     }
+
 
 }

@@ -13,6 +13,13 @@
         <version>2.0.3.RELEASE</version>
     </parent>
 
+    <properties>
+        <repo.id>gemfire-release-repo</repo.id>
+        <repo.name>VMware GemFire Release Repository</repo.name>
+        <repo.url>http://commercial-repo.pivotal.io/data3/gemfire-release-repo/gemfire</repo.url>
+        <spring.data.geode.test.version>0.3.7-RAJ</spring.data.geode.test.version>
+        <spring-data-geode.version>2.7.18</spring-data-geode.version>
+    </properties>
 
 
     <repositories>
@@ -27,7 +34,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-geode-test</artifactId>
-            <version>0.3.7-RAJ</version>
+            <version>${spring.data.geode.test.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -48,7 +55,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-geode</artifactId>
-            <version>2.7.18</version>
+            <version>${spring-data-geode.version}</version>
         </dependency>
 
         <dependency>
@@ -93,36 +100,34 @@
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
-            <version>5.8</version>
+            <version>5.9</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-            <dependency>
-                <groupId>jakarta.xml.bind</groupId>
-                <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>4.0.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-impl</artifactId>
-                <version>4.0.3</version>
-                <scope>runtime</scope>
-            </dependency>
 
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version> <!-- Or the latest version -->
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.5</version>
+        </dependency>
+
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.3</version> <!-- Or the latest version -->
+            <version>4.0.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.2.5</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
@@ -153,4 +158,56 @@
             <url>https://repo.spring.io/milestone</url>
         </pluginRepository>
     </pluginRepositories>
+
+
+    <profiles>
+        <!-- Profile for Unit Tests -->
+        <profile>
+            <id>unit-tests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>com/ubs/exercise/unit/**/*.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for Integration Tests -->
+        <profile>
+            <id>integration-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>com/ubs/exercise/integration/service/**/*.java</include>
+                            </includes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
 </project>

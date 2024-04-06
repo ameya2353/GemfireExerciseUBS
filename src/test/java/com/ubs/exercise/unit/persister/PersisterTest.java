@@ -5,6 +5,7 @@ import com.ubs.exercise.client.model.user.address.Address;
 import com.ubs.exercise.client.persister.Persister;
 import com.ubs.exercise.client.repository.UserRepo;
 import com.ubs.exercise.TestConstants;
+import com.ubs.exercise.unit.test.configuration.EmptyConfiguration;
 import com.ubs.exercise.unit.test.configuration.TestConfiguration;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -24,12 +25,11 @@ import java.util.stream.StreamSupport;
 
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Import(TestConfiguration.class)
+@Import(EmptyConfiguration.class)
 public class PersisterTest{
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
-    private static final String USER_NAME = "andyng123";
 
     @Autowired
     private UserRepo userRepo;
@@ -63,14 +63,14 @@ public class PersisterTest{
 
     @Test
     public void test5_checkIfProperDataPresentInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(true , user.isPresent());
     }
 
 
     @Test
     public void test6_checkDataIntegrityInTheCache(){
-        Optional<User> user = userRepo.findById(USER_NAME);
+        Optional<User> user = userRepo.findById(TestConstants.USER_NAME);
         Assert.assertEquals(TestConstants.TEST_DATA , user.get().toString());
     }
 

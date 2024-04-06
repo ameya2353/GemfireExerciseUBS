@@ -5,6 +5,7 @@ import com.ubs.exercise.client.model.user.User;
 import com.ubs.exercise.client.model.user.address.Address;
 import com.ubs.exercise.client.repository.UserRepo;
 import com.ubs.exercise.TestConstants;
+import com.ubs.exercise.unit.test.configuration.EmptyConfiguration;
 import com.ubs.exercise.unit.test.configuration.TestConfiguration;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -17,10 +18,9 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Import(TestConfiguration.class)
+@Import(EmptyConfiguration.class)
 public class JsonFetcherTest {
 
-    private static final String USER_NAME = "andyng123";
     @Autowired
     JsonFetcher<String , UserRepo> fetcher;
 
@@ -43,7 +43,7 @@ public class JsonFetcherTest {
 
     @Test
     public void test1_checkIfSingleDataIsFetched() throws Exception {
-        String jsonString = fetcher.fetch(USER_NAME);
+        String jsonString = fetcher.fetch(TestConstants.USER_NAME);
         Assert.assertEquals(TestConstants.JSON_TEST_DATA , jsonString);
     }
 
