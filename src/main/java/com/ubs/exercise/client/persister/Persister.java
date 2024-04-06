@@ -38,7 +38,7 @@ public class Persister<T> {
     }
 
     /*
-     * destroy the converted data list to store new data is needed.
+     * destroy the converted data list to store new data if needed.
      *
      * */
     public void destroy(){
