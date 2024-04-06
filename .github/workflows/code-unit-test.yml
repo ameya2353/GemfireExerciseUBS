@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Set up archived Oracle JDK 17.0.10'
+      - name: 'Set up latest Oracle JDK 22'
         uses: oracle-actions/setup-java@v1
         with:
-            website: oracle.com
-            release: 19
-            version: 19.0.1
+          website: oracle.com
+          release: 19
 
       - name: Set JVM OPTIONS
         run: export JAVA_TOOL_OPTIONS='--add-exports=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED --add-opens=java.management/javax.management=ALL-UNNAMED  --add-exports=java.management/com.sun.jmx.remote.security=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=jdk.compiler/ com.sun.tools.javac.main=ALL-UNNAMED'
