@@ -4,11 +4,8 @@ import com.ubs.exercise.client.converter.BaseMapper;
 import com.ubs.exercise.client.converter.IConverter;
 import com.ubs.exercise.client.converter.xml.exception.InvalidXMLFileException;
 import com.ubs.exercise.client.model.XmlWrapper;
-import com.ubs.exercise.client.model.user.User;
-import com.ubs.exercise.client.model.user.address.Address;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,6 +13,12 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+
+/*
+ *
+ * This class is responsible to handle the conversion of XML files to POJO objects.
+ *
+ * */
 
 @Slf4j
 @Component("xmlConverter")

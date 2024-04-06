@@ -18,10 +18,17 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
+/*
+*
+* This class is responsible to handle the conversion of CSV files to POJO objects.
+*
+* */
+
 @Slf4j
 @Component("csvConverter")
 public class CSVConverter<T> implements IConverter {
     private ColumnPositionMappingStrategy converterStrategy;
+
 
 
     @Override

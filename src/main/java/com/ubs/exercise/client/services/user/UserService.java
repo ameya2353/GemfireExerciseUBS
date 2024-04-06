@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+/*
+ * This class is responsible for the conversion and persistence of User class
+ *
+ * */
 @Service
 public class UserService{
     @Autowired

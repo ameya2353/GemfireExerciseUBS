@@ -4,10 +4,12 @@ import com.ubs.exercise.client.converter.json.JsonConverter;
 import com.ubs.exercise.client.persister.Persister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Service;
 
 
-@Service
+/*
+ * JSON to cache service
+ * this service is responsible to convert the JSON data and save it in the cache.
+ * */
 public class JsonToCacheService<T , R extends CrudRepository> implements IDataToCacheService{
     @Autowired
     private JsonConverter jsonConverter;

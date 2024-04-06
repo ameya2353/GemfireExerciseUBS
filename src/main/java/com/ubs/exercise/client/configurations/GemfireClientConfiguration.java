@@ -13,6 +13,11 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 import org.springframework.data.gemfire.transaction.config.EnableGemfireCacheTransactions;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/*
+* configuration class for gemfire client
+* contains configuration for user region in client server
+* */
+
 @ClientCacheApplication(name = "GemFireExerciseClientCache", logLevel = "error", pingInterval = 5000L, readTimeout = 15000, retryAttempts = 1)
 @EnableGemfireFunctionExecutions(basePackages = {"com.ubs.exercise.client.function.executions"})
 @EnableGemfireRepositories(basePackageClasses = UserRepo.class)

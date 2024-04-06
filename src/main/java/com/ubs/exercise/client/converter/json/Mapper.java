@@ -8,6 +8,12 @@ import com.ubs.exercise.client.converter.BaseMapper;
 
 import java.io.IOException;
 
+/*
+ *
+ * Mapper for JSON objects we do not need this at the moment but kept it, if needed in future.
+ *
+ * */
+
 public class Mapper<T> extends JsonDeserializer<T> implements BaseMapper {
     @Override
     public T deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {

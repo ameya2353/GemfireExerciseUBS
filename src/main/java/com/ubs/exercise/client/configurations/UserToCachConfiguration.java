@@ -1,37 +1,21 @@
 package com.ubs.exercise.client.configurations;
 
-import com.ubs.exercise.client.fetcher.JsonFetcher;
 import com.ubs.exercise.client.model.user.User;
 import com.ubs.exercise.client.model.user.UserCsvMapper;
 import com.ubs.exercise.client.repository.UserRepo;
-import com.ubs.exercise.client.services.CSVToCacheService;
-import com.ubs.exercise.client.services.JsonToCacheService;
-import com.ubs.exercise.client.services.XmlToCacheService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
+/*
+* Configuration class for configuring the Bean to Cache operation
+* for easier creation the base type is ToCachConfiguration class it is a generic class.
+* to create new bean to cache config extend ToCachConfiguration and specify all the parameters.
+* */
+
 @Configuration
-public class UserToCachConfiguration {
-    @Bean
-    public CSVToCacheService<User, UserRepo, UserCsvMapper> CSVToCacheService(){
-        return new CSVToCacheService<User, UserRepo, UserCsvMapper>();
+public class UserToCachConfiguration extends  ToCachConfiguration<String , UserRepo , UserRepo , UserCsvMapper>{
+    UserToCachConfiguration(){
+        clazz = User.class;
     }
-
-    @Bean
-    public JsonToCacheService<User, UserRepo> jsonToCacheService(){
-        return new JsonToCacheService<User, UserRepo>(User.class);
-    }
-
-    @Bean
-    public XmlToCacheService<User, UserRepo> xmlToCacheService(){
-        return new XmlToCacheService<User, UserRepo>(User.class);
-    }
-
-    @Bean
-    public JsonFetcher<String, UserRepo> jsonFetcher(){
-        return new JsonFetcher<String, UserRepo>();
-    }
-
 
 }

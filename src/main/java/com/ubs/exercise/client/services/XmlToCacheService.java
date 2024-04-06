@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-@Service
+
+/*
+ * XML to cache service
+ * this service is responsible to convert the XML data and save it in the cache.
+ * */
 public class XmlToCacheService <T , R extends CrudRepository> implements IDataToCacheService{
     @Autowired
     private XMLConverter jsonConverter;

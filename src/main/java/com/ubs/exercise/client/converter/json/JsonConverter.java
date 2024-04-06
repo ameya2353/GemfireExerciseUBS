@@ -11,6 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+
+/*
+ *
+ * This class is responsible to handle the conversion of JSON files to POJO objects.
+ *
+ * */
 @Slf4j
 @Component("jsonConverter")
 public class JsonConverter implements IConverter {
