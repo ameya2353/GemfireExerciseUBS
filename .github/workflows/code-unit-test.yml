@@ -17,8 +17,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Show File Structure
-        run: ls -lrt
-
       - name: Run Maven tests
         run: mvn verify
