@@ -1,6 +1,7 @@
 package com.ubs.exercise.unit.converter;
 
 import com.ubs.exercise.client.converter.IConverter;
+import com.ubs.exercise.client.converter.IConverterWithStrategy;
 import com.ubs.exercise.client.converter.csv.CSVConverter;
 import com.ubs.exercise.client.converter.csv.exception.CsvConverterException;
 import com.ubs.exercise.client.converter.csv.exception.InvalidCsvFileException;
@@ -14,11 +15,14 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 public class CSVConverterTest {
-    private IConverter userCSVConverter = new CSVConverter();
+    private IConverterWithStrategy userCSVConverter = new CSVConverter();
+
+    private final String noFile = "file-not-found.csv";
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -48,6 +52,13 @@ public class CSVConverterTest {
         exception.expectMessage(TestConstants.NOT_A_CSV_EXCEPTION_MESSEGE);
         userCSVConverter.setConverterStrategy(new UserCsvMapper());
         userCSVConverter.convert(TestConstants.INVALID_FILE_PATH);
+    }
+
+    @Test()
+    public void thowsFileNotFoundExceptionIfFileDoesntExist() throws Exception {
+        exception.expect(FileNotFoundException.class);
+        exception.expectMessage(String.format(TestConstants.FILE_NOT_FOUND ,noFile));
+        List<User> users = userCSVConverter.convert("file-not-found.csv");
     }
 
     @Test()

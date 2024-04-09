@@ -24,7 +24,7 @@ public class JsonConverter implements IConverter {
     Class clazz =null;
 
     @Override
-    public <T> List<T> convert(String path) throws IOException {
+    public <T> List<T> convert(String path) throws Exception {
         if(path==null){
             log.info("No path specified.");
             return Collections.EMPTY_LIST;
@@ -34,14 +34,10 @@ public class JsonConverter implements IConverter {
         return mapper.readValue(new File(path),mapper.getTypeFactory().constructCollectionType(List.class, clazz));
     }
 
-    @Override
-    public void setConverterStrategy(BaseMapper strategy) throws Exception {
-       throw new IllegalAccessException("Json Converter does not require Converter Strategy. Please remove the setConverterStrategy function call");
-    }
 
     @Override
-    public boolean isFileValid(String filePath) {
-        if(filePath.endsWith(".json")){
+    public boolean isFileValid(String filePath) throws Exception {
+        if(filePath.endsWith(".json") && isFileExists(filePath)){
             return true;
         }
         throw new InvalidJsonFileException("Provided file is not a json file");

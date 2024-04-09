@@ -1,6 +1,5 @@
 package com.ubs.exercise.client.converter.xml;
 
-import com.ubs.exercise.client.converter.BaseMapper;
 import com.ubs.exercise.client.converter.IConverter;
 import com.ubs.exercise.client.converter.xml.exception.InvalidXMLFileException;
 import com.ubs.exercise.client.model.XmlWrapper;
@@ -11,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,14 +35,10 @@ public class XMLConverter<T> implements IConverter {
         return (List<T>) unmarshalXMLToList(path , type);
     }
 
-    @Override
-    public void setConverterStrategy(BaseMapper strategy) throws Exception {
-        throw new IllegalAccessException("XML Converter does not require Converter Strategy. Please remove the setConverterStrategy function call");
-    }
 
     @Override
-    public boolean isFileValid(String filePath) {
-        if(filePath.endsWith(".xml")){
+    public boolean isFileValid(String filePath) throws Exception{
+        if(filePath.endsWith(".xml") && isFileExists(filePath)){
             return true;
         }
         throw new InvalidXMLFileException("Provided file is not a xml file");

@@ -2,6 +2,7 @@ package com.ubs.exercise.client.services;
 
 import com.ubs.exercise.client.converter.BaseMapper;
 import com.ubs.exercise.client.converter.IConverter;
+import com.ubs.exercise.client.converter.IConverterWithStrategy;
 import com.ubs.exercise.client.model.user.User;
 import com.ubs.exercise.client.persister.Persister;
 import com.ubs.exercise.client.repository.UserRepo;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class CSVToCacheService<T , R extends CrudRepository , M extends BaseMapper> implements IDataToCacheService {
     @Autowired
     @Qualifier("csvConverter")
-    private IConverter csvConverter;
+    private IConverterWithStrategy csvConverter;
 
     @Autowired
     private UserRepo repository;

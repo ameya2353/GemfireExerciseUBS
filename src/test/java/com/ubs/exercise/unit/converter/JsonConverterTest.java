@@ -12,12 +12,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JsonConverterTest {
 
+    private final String noFile = "file-not-found.json";
     IConverter converter = new JsonConverter();
 
     @Rule
@@ -35,13 +37,6 @@ public class JsonConverterTest {
         Assert.assertEquals(users.size(),0);
     }
 
-    @Test()
-    public void test2_ifConverterMappingIsDefined() throws Exception{
-        exception.expect(IllegalAccessException.class);
-        exception.expectMessage(TestConstants.CONVERTER_MAPPING_NOT_REQUIRED_EXCEPTION_MESSEGE);
-        converter.setConverterStrategy(new UserCsvMapper());
-        converter.convert(TestConstants.CSV_VALID_FILE_PATH);
-    }
 
 
 
@@ -50,6 +45,13 @@ public class JsonConverterTest {
         exception.expect(InvalidJsonFileException.class);
         exception.expectMessage(TestConstants.NOT_A_JSON_EXCEPTION_MESSEGE);
         converter.convert(TestConstants.CSV_VALID_FILE_PATH);
+    }
+
+    @Test()
+    public void thowsFileNotFoundExceptionIfFileDoesntExist() throws Exception {
+        exception.expect(FileNotFoundException.class);
+        exception.expectMessage(String.format(TestConstants.FILE_NOT_FOUND ,noFile));
+        List<User> users = converter.convert(noFile);
     }
 
     @Test()

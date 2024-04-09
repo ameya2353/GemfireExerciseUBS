@@ -6,6 +6,7 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.ubs.exercise.client.converter.BaseMapper;
 import com.ubs.exercise.client.converter.IConverter;
+import com.ubs.exercise.client.converter.IConverterWithStrategy;
 import com.ubs.exercise.client.converter.csv.exception.InvalidCsvFileException;
 import com.ubs.exercise.client.converter.csv.exception.CsvConverterException;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +27,13 @@ import java.util.List;
 
 @Slf4j
 @Component("csvConverter")
-public class CSVConverter<T> implements IConverter {
+public class CSVConverter<T> implements IConverterWithStrategy {
     private ColumnPositionMappingStrategy converterStrategy;
 
 
 
     @Override
-    public <T> List<T> convert(String path) throws IOException {
+    public <T> List<T> convert(String path) throws Exception {
         if(path==null){
             log.info("No path specified, returning empty list");
             return Collections.EMPTY_LIST;
@@ -57,8 +58,8 @@ public class CSVConverter<T> implements IConverter {
     }
 
     @Override
-    public boolean isFileValid(String filePath) {
-        if(filePath.endsWith(".csv")){
+    public boolean isFileValid(String filePath) throws Exception {
+        if(filePath.endsWith(".csv") && isFileExists(filePath)){
             return true;
         }
         throw new InvalidCsvFileException("Provided file is not a csv file");

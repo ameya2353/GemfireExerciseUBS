@@ -1,6 +1,8 @@
 package com.ubs.exercise.client.converter;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /*
@@ -19,18 +21,10 @@ public interface IConverter{
 
 
     /*
-     * sometimes conversion strategy is required to tell the converted how it is expected to read the data.
-     * @param strategy -> type: BaseMapper | the strategy must extend BaseMapper, so it can be used by the converter.
-     * Currently only CSV requires this feature, all other converters have inbuild conversion strategies. this is cause
-     * only csv has linear data, ie it is unstructured and java is not able to do 1-to-1 mapping of the data.
-     * */
-    public void setConverterStrategy(BaseMapper strategy) throws Exception;
-
-    /*
      * Checks if the provided file is of valid type or not
      * @param path -> path of the file to be validated
      * */
-    public boolean isFileValid(String filePath);
+    public boolean isFileValid(String filePath) throws Exception;
 
 
     /*
@@ -38,5 +32,15 @@ public interface IConverter{
      * @param clazz -> class the converted has to support
      * */
     public void supports(Class clazz) throws IllegalAccessException;
+
+
+    public default boolean isFileExists(String filePath) throws Exception {
+        File f = new File(filePath);
+        if(!f.exists()){
+            throw new FileNotFoundException(String.format("Unable to locate file: %s",filePath));
+        }
+        return true;
+    }
+
 
 }

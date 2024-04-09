@@ -14,10 +14,10 @@
     - These classes are generic and can be used to convert any given type if Domain object from files to POJOs.
     - Since xml and json are structured data representation the java equivalent can be retrived easily using JAXB and Jackson libraries.
     - CSV on other hand is a linear-structured data representation, hence we need to tell the program how is the mapping done to the POJO.
-    - The implementation contains mapper support of all 3 type. But only CSV has been implemented as other were not required.
-    - The only purpose of these implementation is to convert data to POJO, if any further format is required then the converter has to be introduced implementing the [IConverter](src/main/java/com/ubs/exercise/client/converter/IConverter.java) interface
+    - Interface segregation has been introduced by creating [IConverterWithStrategy.java](src/main/java/com/ubs/exercise/client/converter/IConverterWithStrategy.java) which extends IConverter and has one abstract method setConverterStrategy.
+    - The only purpose of these implementation is to convert data to POJO, if any further format is required then a converter has to be introduced implementing the [IConverter](src/main/java/com/ubs/exercise/client/converter/IConverter.java) interface or [IConverterWithStrategy.java](src/main/java/com/ubs/exercise/client/converter/IConverterWithStrategy.java)
 
-    ### 2.  Persister
+      ### 2.  Persister
     
     - A persister is responsible to persist a list of data provided to it. The list must be of Domain object annotated by the Spring Data Geode persistence annotations.
     - This persister can be used in other application as well as it is abstracted out of this particular scenario, hence making it reusable in any scenario where persistence is required.
